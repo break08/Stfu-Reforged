@@ -30,7 +30,7 @@ import static stfu.Main.client;
 public abstract class Tooltips {
     @Shadow public abstract int guiWidth();
 
-    @ModifyVariable(method = "renderTooltip",
+    @ModifyVariable(method = "renderTooltipInternal",
             at = @At("HEAD"), index = 2, argsOnly = true)
     private List<ClientTooltipComponent> wrapLines(List<ClientTooltipComponent> original) {
         ArrayList<ClientTooltipComponent> components = new ArrayList<>();
@@ -43,12 +43,12 @@ public abstract class Tooltips {
             final int length = components.size();
             client.font.getSplitter().splitLines(new FormattedText() {
                 @Override
-                public <T> Optional<T> visit(@NotNull ContentConsumer<T> visitor) {
+                public <T> @NotNull Optional<T> visit(@NotNull ContentConsumer<T> visitor) {
                     return visit((s, t)->visitor.accept(t), Style.EMPTY);
                 }
 
                 @Override
-                public <T> Optional<T> visit(@NotNull StyledContentConsumer<T> visitor, @NotNull Style s) {
+                public <T> @NotNull Optional<T> visit(@NotNull StyledContentConsumer<T> visitor, @NotNull Style s) {
                     component.text.accept((index, style, codePoint) -> visitor.accept(style.applyTo(s), new String(Character.toChars(codePoint))).isEmpty());
                     return Optional.empty();
                 }

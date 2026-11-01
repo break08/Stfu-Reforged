@@ -18,9 +18,7 @@ import static stfu.Main.*;
 public class ModEvents {
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {
-        if (client.player == null){
-            return;
-        }
+        if (client.player == null) return;
         if (SKIP_MUSIC_KEY.consumeClick()) {
             client.player.displayClientMessage(Component.translatable("msg.stfu.skip_music"), true);
             client.getMusicManager().stopPlaying();

@@ -12,6 +12,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
@@ -49,13 +50,15 @@ public class Main {
     public Main(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
 
-        modEventBus.register(NARRATOR_KEY);
-
-        modEventBus.register(TOGGLE_MUSIC_KEY);
-
-        modEventBus.register(SKIP_MUSIC_KEY);
+        modEventBus.addListener(this::registerKeys);
 
         NeoForge.EVENT_BUS.register(this);
+    }
+
+    private void registerKeys(RegisterKeyMappingsEvent event) {
+        event.register(NARRATOR_KEY);
+        event.register(SKIP_MUSIC_KEY);
+        event.register(TOGGLE_MUSIC_KEY);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

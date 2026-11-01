@@ -10,10 +10,13 @@ import stfu.config.Config;
 
 import static stfu.Main.client;
 
+@SuppressWarnings("ConstantConditions")
 @Mixin(Minecraft.class)
 public class WindowActiveListenerMixin {
     @Inject(method = "setWindowActive", at = @At("TAIL"))
     private void setWindowActive(boolean bl, CallbackInfo ci) {
-        client.getSoundManager().updateSourceVolume(SoundSource.MASTER, client.options.getSoundSourceVolume(SoundSource.MASTER) * (!bl? Config.get().unfocusedVolume : 1F));
+        if (client.getSoundManager() != null) {
+            client.getSoundManager().updateSourceVolume(SoundSource.MASTER, client.options.getSoundSourceVolume(SoundSource.MASTER) * (!bl ? Config.get().unfocusedVolume : 1F));
+        }
     }
 }
