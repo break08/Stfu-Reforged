@@ -1,0 +1,45 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "stfu.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "chat.ImprovedCommandSuggestions.SharedSuggestionProviderMixin",
+    "DeleteToTrash.LevelStorageAccessMixin",
+    "rendering.FixTitleSize",
+    "ThreadPriorities.MinecraftServerMixin",
+    "ThreadPriorities.UtilMixin"
+  ],
+  "client": [
+    "AllowScreensInPortals",
+    "chat.CommandLengthLimit",
+    "chat.Deduplicate",
+    "chat.Filter",
+    "chat.MoreHistory",
+    "chat.RemoveUnsignedIcon",
+    "chat.ImprovedCommandSuggestions.CommandSuggestionsMixin",
+    "DeleteToTrash.WorldListEntryMixin",
+    "keybinds.RemapNarrator",
+    "keybinds.MultipleBindingsPerKey.NoReusedModifierKeyWarning",
+    "RemoveOverlay.LoadingOverlayMixin",
+    "RemoveOverlay.MinecraftMixin",
+    "RemoveOverlay.MouseHandlerMixin",
+    "rendering.DisableParticles",
+    "rendering.DisableRecipeToast",
+    "rendering.DisableToasts",
+    "rendering.DisableWeather",
+    "rendering.ParticleCulling",
+    "rendering.ModelGaps.ItemModelGeneratorMixin",
+    "rendering.ModelGaps.SpriteMixin",
+    "ThreadPriorities.MainMixin",
+    "UnfocusedVolumeReducer.SoundEngineMixin",
+    "UnfocusedVolumeReducer.WindowActiveListenerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "plugin": "stfu.MixinPlugin"
+}
