@@ -2,7 +2,7 @@ package stfu.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTextTooltip;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
@@ -10,6 +10,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.Style;
 import net.minecraft.locale.Language;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2i;
 import org.joml.Vector2ic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,12 +25,12 @@ import java.util.Optional;
 
 import static stfu.Main.client;
 
-@Mixin(GuiGraphicsExtractor.class)
+@Mixin(GuiGraphics.class)
 @DisableIf({"legacy", "legendarytooltips"})
 public abstract class Tooltips {
     @Shadow public abstract int guiWidth();
 
-    @ModifyVariable(method = /*? > 1.21.11 {*/"tooltip"/*? } else >1.21.1 {*//*"renderTooltip"*//*?}else{*//*"renderTooltipInternal"*//*?}*/,
+    @ModifyVariable(method = "renderTooltip",
             at = @At("HEAD"), index = 2, argsOnly = true)
     private List<ClientTooltipComponent> wrapLines(List<ClientTooltipComponent> original) {
         ArrayList<ClientTooltipComponent> components = new ArrayList<>();
@@ -42,12 +43,12 @@ public abstract class Tooltips {
             final int length = components.size();
             client.font.getSplitter().splitLines(new FormattedText() {
                 @Override
-                public <T> Optional<T> visit(ContentConsumer<T> visitor) {
+                public <T> Optional<T> visit(@NotNull ContentConsumer<T> visitor) {
                     return visit((s, t)->visitor.accept(t), Style.EMPTY);
                 }
 
                 @Override
-                public <T> Optional<T> visit(StyledContentConsumer<T> visitor, Style s) {
+                public <T> Optional<T> visit(@NotNull StyledContentConsumer<T> visitor, @NotNull Style s) {
                     component.text.accept((index, style, codePoint) -> visitor.accept(style.applyTo(s), new String(Character.toChars(codePoint))).isEmpty());
                     return Optional.empty();
                 }
@@ -58,7 +59,7 @@ public abstract class Tooltips {
         return components;
     }
 
-    @WrapOperation(method = /*? > 1.21.11 {*/"tooltip"/*? } else > 1.21.1 {*//*"renderTooltip"*//*?}else{*//*"renderTooltipInternal"*//*?}*/,
+    @WrapOperation(method = "renderTooltipInternal",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;positionTooltip(IIIIII)Lorg/joml/Vector2ic;"))
     private Vector2ic reposition(ClientTooltipPositioner instance, int screenWidth, int screenHeight, int mouseX, int mouseY, int width, int height, Operation<Vector2ic> original) {
         Vector2ic vector2ic = original.call(instance, screenWidth, screenHeight, mouseX, mouseY, width, height);
