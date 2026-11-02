@@ -64,6 +64,7 @@ public class Config {
     @SerialEntry
     public boolean disableWidgetFade = true;
 
+
     @AutoGen(category = basic, group = loading)
     @Boolean
     @SerialEntry
@@ -84,6 +85,7 @@ public class Config {
     @SerialEntry
     public boolean disableWorldAdvice = true;
 
+    @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean fixModelGaps = true;
@@ -108,10 +110,13 @@ public class Config {
     @SerialEntry
     public boolean renderWeather = true;
 
+    /*
     @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean combineBars = false;
+
+     */
 
     @AutoGen(category = basic)
     @Boolean
