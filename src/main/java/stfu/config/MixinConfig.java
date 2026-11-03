@@ -1,7 +1,7 @@
 package stfu.config;
 
 import com.google.common.io.Files;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +13,7 @@ public class MixinConfig {
     public static final ArrayList<String> DISABLED = new ArrayList<>();
 
     private static void load() {
-        File file = FabricLoader.getInstance().getConfigDir().resolve("stfu-disable.txt").toFile();
+        File file = FMLPaths.CONFIGDIR.get().resolve("stfu-disable.txt").toFile();
         if (file.exists()) {
             try(BufferedReader reader = Files.newReader(file, StandardCharsets.UTF_8)) {
                 reader.lines().forEach(line -> {

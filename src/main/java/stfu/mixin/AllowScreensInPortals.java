@@ -8,10 +8,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(LocalPlayer.class)
 public class AllowScreensInPortals {
-//? <= 1.21.8 {
-    /*@Redirect(method = {"handlePortalTransitionEffect", "handleNetherPortalClient", "handleConfusionTransitionEffect"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;isPauseScreen()Z"))
-*///? } else
-    @Redirect(method = "handlePortalTransitionEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;isAllowedInPortal()Z"))
+    @Redirect(method = {"handleNetherPortalClient"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;isPauseScreen()Z"))
     public boolean tickNausea(Screen instance) {
         return true;
     }

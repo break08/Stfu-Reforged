@@ -85,6 +85,7 @@ public class Config {
     public boolean disableWorldAdvice = true;
 
 
+    @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean fixModelGaps = true;

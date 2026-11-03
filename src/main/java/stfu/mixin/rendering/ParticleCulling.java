@@ -1,5 +1,4 @@
-//? <= 1.21.8 {
-/*package stfu.mixin.rendering;
+package stfu.mixin.rendering;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -13,13 +12,8 @@ import static stfu.Main.client;
 
 @Mixin(ParticleEngine.class)
 public class ParticleCulling {
-//? > 1.21 {
-    @WrapWithCondition(method = "renderParticleType", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/Particle;render(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/client/Camera;F)V"))
-//?} else
-  //@WrapWithCondition(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/Particle;render(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/client/Camera;F)V"))
-
+    @WrapWithCondition(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lnet/minecraft/client/renderer/LightTexture;Lnet/minecraft/client/Camera;FLnet/minecraft/client/renderer/culling/Frustum;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/Particle;render(Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/client/Camera;F)V"))
     private static boolean renderParticles(Particle instance, VertexConsumer vertexConsumer, Camera camera, float v) {
         return client.levelRenderer.cullingFrustum.isVisible(instance.getBoundingBox());
     }
 }
-*///?}
