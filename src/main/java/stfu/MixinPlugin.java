@@ -1,6 +1,6 @@
 package stfu;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.fml.ModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -26,7 +26,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
         try {
             DisableIf annotation = Annotations.getValue(Annotations.getVisible(MixinService.getService().getBytecodeProvider().getClassNode(mixinClassName), DisableIf.class));
-            if (annotation != null) for (String mod : annotation.value()) if (FabricLoader.getInstance().isModLoaded(mod)) return false;
+            if (annotation != null) for (String mod : annotation.value()) if (ModList.get().isLoaded(mod)) return false;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

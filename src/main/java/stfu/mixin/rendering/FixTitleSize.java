@@ -1,6 +1,9 @@
 package stfu.mixin.rendering;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -9,8 +12,6 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(Gui.class)
 public abstract class FixTitleSize {
@@ -22,31 +23,31 @@ public abstract class FixTitleSize {
     @Nullable
     protected Component subtitle;
 
-    @ModifyArgs(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;scale(FFF)V", ordinal = 0))
-    private void renderTitle(Args args, @Local(argsOnly = true) GuiGraphics guiGraphics) {
-        if (this.title == null){
-            return;
-        }
-        int titleWidth = getFont().width(this.title);
-        int maxWidth = guiGraphics.guiWidth() - 16;
+    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;scale(FFF)V", ordinal = 0))
+    private void renderTitle(PoseStack instance, float x, float y, float z, Operation<Void> original, @Local(argsOnly = true) GuiGraphics guiGraphics) {
+        if (this.title != null) {
+            int titleWidth = getFont().width(this.title);
+            int maxWidth = guiGraphics.guiWidth() - 16;
 
-        if (titleWidth * 4 > maxWidth) {
-            args.set(0, (float) maxWidth / titleWidth);
-            args.set(1, (float) maxWidth / titleWidth);
+            if (titleWidth * 4 > maxWidth) {
+                x = (float) maxWidth / titleWidth;
+                y = (float) maxWidth / titleWidth;
+            }
         }
+        original.call(instance, x, y, z);
     }
 
-    @ModifyArgs(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;scale(FFF)V", ordinal = 1))
-    private void renderSubTitle(Args args, @Local(argsOnly = true) GuiGraphics guiGraphics) {
-        if (this.subtitle == null){
-            return;
-        }
-        int titleWidth = getFont().width(this.subtitle);
-        int maxWidth = guiGraphics.guiWidth() - 16;
+    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;scale(FFF)V", ordinal = 1))
+    private void renderSubTitle(PoseStack instance, float x, float y, float z, Operation<Void> original, @Local(argsOnly = true) GuiGraphics guiGraphics) {
+        if (this.subtitle != null) {
+            int titleWidth = getFont().width(this.subtitle);
+            int maxWidth = guiGraphics.guiWidth() - 16;
 
-        if (titleWidth * 2 > maxWidth) {
-            args.set(0, (float) maxWidth / titleWidth);
-            args.set(1, (float) maxWidth / titleWidth);
+            if (titleWidth * 2 > maxWidth) {
+                x = (float) maxWidth / titleWidth;
+                y = (float) maxWidth / titleWidth;
+            }
         }
+        original.call(instance, x, y, z);
     }
 }

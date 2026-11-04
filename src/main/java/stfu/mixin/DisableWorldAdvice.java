@@ -22,7 +22,7 @@ abstract class DisableWorldAdvice {
         }
     }
 
-    @Redirect(method = {"doLoadLevel"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/WorldData;worldGenSettingsLifecycle()Lcom/mojang/serialization/Lifecycle;"))
+    @Redirect(method = {"doLoadLevel", "openWorldCheckWorldStemCompatibility"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/storage/WorldData;worldGenSettingsLifecycle()Lcom/mojang/serialization/Lifecycle;"))
     private Lifecycle openWorldCheckWorldStemCompatibility(WorldData saveProperties) {
         if (Config.get().disableWorldAdvice) return Lifecycle.stable();
         return saveProperties.worldGenSettingsLifecycle();
