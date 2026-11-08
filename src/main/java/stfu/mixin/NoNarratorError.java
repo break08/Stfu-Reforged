@@ -1,3 +1,4 @@
+/*
 package stfu.mixin;
 
 import com.mojang.text2speech.Narrator;
@@ -13,3 +14,5 @@ public interface NoNarratorError {
                     target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Throwable;)V"))
     private static void noNarratorError(Logger instance, String s, Throwable throwable) {}
 }
+
+ */

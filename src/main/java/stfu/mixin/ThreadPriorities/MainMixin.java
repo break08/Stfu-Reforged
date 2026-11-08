@@ -1,3 +1,4 @@
+/*
 package stfu.mixin.ThreadPriorities;
 
 import net.minecraft.client.main.Main;
@@ -15,3 +16,5 @@ public class MainMixin {
         MemoryReserve.allocate();
     }
 }
+
+ */

@@ -13,7 +13,7 @@ import stfu.config.Config;
 @Mixin(TextureAtlasSprite.class)
 public abstract class SpriteMixin {
     @Shadow @Final private ResourceLocation atlasLocation;
-    @Unique private static final ResourceLocation stfuReforged$blockAtlas = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/atlas/blocks.png");
+    @Unique private static final ResourceLocation stfuReforged$blockAtlas = new ResourceLocation("minecraft", "textures/atlas/blocks.png");
 
     @ModifyReturnValue(method = "uvShrinkRatio", at = @At("RETURN"))
     private float uvShrinkRatio(float original) {

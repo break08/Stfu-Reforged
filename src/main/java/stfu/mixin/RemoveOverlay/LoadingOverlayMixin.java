@@ -10,12 +10,26 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import stfu.config.Config;
 
 @Mixin(LoadingOverlay.class)
 public abstract class LoadingOverlayMixin {
     @Shadow @Final private boolean fadeIn;
+
+    @Inject(method = "render", at = @At("HEAD"))
+    private void drawScreenInstead(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
+        if (Config.get().disableSplash && fadeIn) {
+            net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getInstance();
+            if (mc.screen != null) mc.screen.render(guiGraphics, mouseX, mouseY, partialTick);
+        }
+    }
+
+    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V"))
+    private void skipOverlayScreenRender(net.minecraft.client.gui.screens.Screen instance, GuiGraphics g, int x, int y, float t, Operation<Void> original) {
+        if (!Config.get().disableSplash || !fadeIn) original.call(instance, g, x, y, t);
+    }
 
     @ModifyConstant(method = {"render"}, constant = @Constant(floatValue = 2.0F))
     private float disableFade(float progress) {

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Options.class)
-abstract class DefaultSettings {
+public abstract class DefaultSettings {
     @Shadow
     @Final
     private OptionInstance<Boolean> operatorItemsTab;
@@ -19,7 +19,7 @@ abstract class DefaultSettings {
     @Final
     private OptionInstance<Boolean> realmsNotifications;
 
-    @Inject(method = "load", at = @At("HEAD"))
+    @Inject(method = "load*", at = @At("HEAD"))
     private void changeOptions(CallbackInfo ci) {
         Options t = (Options) (Object) this;
         t.onboardAccessibility = false;

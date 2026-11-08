@@ -6,13 +6,8 @@
   "refmap": "stfu.refmap.json",
   "mixins": [
     "DefaultLANPort",
-    "NoNarratorError",
     "UnPinResourcePacks",
-    "chat.ImprovedCommandSuggestions.SharedSuggestionProviderMixin",
-    "DeleteToTrash.LevelStorageAccessMixin",
-    "keybinds.MultipleBindingsPerKey.NoReusedModifierKeyWarning",
-    "ThreadPriorities.MinecraftServerMixin",
-    "ThreadPriorities.UtilMixin"
+    "DeleteToTrash.LevelStorageAccessMixin"
   ],
   "client": [
     "AllowScreensInPortals",
@@ -35,6 +30,7 @@
     "DeleteToTrash.WorldListEntryMixin",
     "keybinds.RemapNarrator",
     "keybinds.MultipleBindingsPerKey.KeyBindingMixin",
+    "keybinds.MultipleBindingsPerKey.NoReusedModifierKeyWarning",
     "RemoveOverlay.LoadingOverlayMixin",
     "RemoveOverlay.MinecraftMixin",
     "RemoveOverlay.MouseHandlerMixin",
@@ -47,7 +43,6 @@
     "rendering.ParticleCulling",
     "rendering.ModelGaps.ItemModelGeneratorMixin",
     "rendering.ModelGaps.SpriteMixin",
-    "ThreadPriorities.MainMixin",
     "UnfocusedVolumeReducer.SoundEngineMixin",
     "UnfocusedVolumeReducer.WindowActiveListenerMixin"
   ],

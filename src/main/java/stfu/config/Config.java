@@ -12,7 +12,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 
 public class Config {
     public static final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
-            .id(ResourceLocation.fromNamespaceAndPath("stfu", "config"))
+            .id(new ResourceLocation("stfu", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FMLPaths.CONFIGDIR.get().resolve("stfu.json5"))
                     .setJson5(true)
@@ -113,11 +113,6 @@ public class Config {
     @AutoGen(category = basic)
     @Boolean
     @SerialEntry
-    public boolean combineBars = false;
-
-    @AutoGen(category = basic)
-    @Boolean
-    @SerialEntry
     public boolean deleteToTrash = true;
 
     @AutoGen(category = basic)
@@ -126,6 +121,7 @@ public class Config {
     public float unfocusedVolume = 1F;
 
 
+    /*
 
     @AutoGen(category = advanced)
     @IntSlider(min = 1, max = 10, step = 1)
@@ -141,6 +137,8 @@ public class Config {
     @IntSlider(min = 1, max = 10, step = 1)
     @SerialEntry
     public int ioThreadPriority = 1;
+
+     */
 
     public enum AdminChat implements NameableEnum {
         ENABLED,

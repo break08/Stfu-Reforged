@@ -1,3 +1,4 @@
+/*
 package stfu.mixin.chat.ImprovedCommandSuggestions;
 
 import net.minecraft.commands.SharedSuggestionProvider;
@@ -19,3 +20,5 @@ public interface SharedSuggestionProviderMixin {
         cir.setReturnValue(candidate.contains(remaining) || (remaining.indexOf(':') > 0 && candidate.contains(remaining.split(":", 2)[1])));
     }
 }
+
+ */

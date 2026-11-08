@@ -1,3 +1,4 @@
+/*
 package stfu.mixin.ThreadPriorities;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -7,14 +8,27 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import stfu.config.Config;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadFactory;
+
 @Mixin(Util.class)
 public abstract class UtilMixin {
     @WrapOperation(
-            method = {"/lambda\\$makeExecutor\\$\\d+/", "/lambda\\$makeIoExecutor\\$\\d+/"},
-            at = @At(value = "INVOKE", target = "Ljava/lang/Thread;setName(Ljava/lang/String;)V")
+            method = {"makeExecutor", "makeIoExecutor"},
+            at = @At(
+                    value = "INVOKE",
+                    target = "Ljava/util/concurrent/Executors;newCachedThreadPool(Ljava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService;"
+            )
     )
-    private static void setName(Thread instance, String name, Operation<Void> original) {
-        original.call(instance, name);
-        instance.setPriority(Config.get().ioThreadPriority);
+    private static ExecutorService wrapCachedThreadPool(ThreadFactory factory, Operation<ExecutorService> original) {
+        ThreadFactory customFactory = runnable -> {
+            Thread thread = factory.newThread(runnable);
+            thread.setPriority(Config.get().ioThreadPriority);
+            return thread;
+        };
+
+        return original.call(customFactory);
     }
 }
+
+ */
