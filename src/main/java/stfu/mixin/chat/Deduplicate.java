@@ -1,7 +1,7 @@
 package stfu.mixin.chat;
 
 import net.minecraft.client.gui.components.ChatComponent;
-import net.minecraft.client.GuiMessage;
+import net.minecraft.client.multiplayer.chat.GuiMessage;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
@@ -27,10 +27,10 @@ public abstract class Deduplicate {
     protected abstract void /*? >1.21{*/refreshTrimmedMessages/*?}else{*//*refreshTrimmedMessage*//*?}*/();
 
     @ModifyVariable(
-            method = {"addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V"},
+            method = {"addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/multiplayer/chat/GuiMessageSource;Lnet/minecraft/client/multiplayer/chat/GuiMessageTag;)V"},
             at = @At("HEAD"),
-            argsOnly = true
-    )
+            argsOnly = true,
+            name = "contents")
     private Component compact(Component message) {
         if (Config.get().compactChat == Config.CompactChat.NEVER || allMessages.isEmpty()) return message;
         // Skip common separators
@@ -55,7 +55,7 @@ public abstract class Deduplicate {
                 Component last = siblings.get(siblings.size() - 1);
                 if (last.getStyle() == OCCURRENCES) {
                     String raw = last.getString();
-                    if (raw.startsWith(" (") && raw.endsWith(")")) {
+                    if (raw != null && raw.startsWith(" (") && raw.endsWith(")")) {
                         o = raw.substring(2, raw.length() - 1);
                         siblings.remove(siblings.size() - 1);
                     }

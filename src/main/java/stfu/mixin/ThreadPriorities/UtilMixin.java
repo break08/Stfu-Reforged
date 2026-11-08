@@ -2,10 +2,10 @@ package stfu.mixin.ThreadPriorities;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.Util;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import stfu.config.Config;
+import net.minecraft.util.Util;
 
 @Mixin(Util.class)
 public abstract class UtilMixin {

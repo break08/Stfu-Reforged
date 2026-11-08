@@ -7,12 +7,12 @@ import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.fml.loading.FMLPaths;
 
 public class Config {
     public static final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
-            .id(ResourceLocation.fromNamespaceAndPath("stfu", "config"))
+            .id(Identifier.fromNamespaceAndPath("stfu", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FMLPaths.CONFIGDIR.get().resolve("stfu.json5"))
                     .setJson5(true)
@@ -110,13 +110,11 @@ public class Config {
     @SerialEntry
     public boolean renderWeather = true;
 
-    /*
     @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean combineBars = false;
 
-     */
 
     @AutoGen(category = basic)
     @Boolean

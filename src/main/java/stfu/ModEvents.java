@@ -20,8 +20,11 @@ public class ModEvents {
     public static void onClientTick(ClientTickEvent.Post event) {
         if (client.player == null) return;
         if (SKIP_MUSIC_KEY.consumeClick()) {
-            client.player.displayClientMessage(Component.translatable("msg.stfu.skip_music"), true);
+            client.player.sendOverlayMessage(Component.translatable("msg.stfu.skip_music"));
             client.getMusicManager().stopPlaying();
+            if (client.getSituationalMusic() == null){
+                return;
+            }
             client.getMusicManager().startPlaying(client.getSituationalMusic());
             musicPaused = false;
         }
@@ -32,13 +35,13 @@ public class ModEvents {
                     if (entry.getKey().getSource() == SoundSource.MUSIC) entry.getValue().execute(Channel::pause);
                 }
                 //$ overlay_message '"msg.stfu.pause_music"'
-                client.player.displayClientMessage(Component.translatable("msg.stfu.pause_music"), true);
+                client.player.sendOverlayMessage(Component.translatable("msg.stfu.pause_music"));
             } else {
                 for (Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry : client.getSoundManager().soundEngine.instanceToChannel.entrySet()) {
                     if (entry.getKey().getSource() == SoundSource.MUSIC) entry.getValue().execute(Channel::unpause);
                 }
                 //$ overlay_message '"msg.stfu.resume_music"'
-                client.player.displayClientMessage(Component.translatable("msg.stfu.resume_music"), true);
+                client.player.sendOverlayMessage(Component.translatable("msg.stfu.resume_music"));
             }
         }
         if (musicPaused) client.getMusicManager().nextSongDelay++;
