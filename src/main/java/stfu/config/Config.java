@@ -88,11 +88,6 @@ public class Config {
     @AutoGen(category = basic)
     @Boolean
     @SerialEntry
-    public boolean fixModelGaps = true;
-
-    @AutoGen(category = basic)
-    @Boolean
-    @SerialEntry
     public boolean nightVisionFlicker = false;
 
     @AutoGen(category = basic, group = rendering)

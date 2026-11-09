@@ -37,6 +37,9 @@ public abstract class CombineBars {
         if (!Config.get().combineBars) original.call(instance, context, tickCounter);
         else {
             LocalPlayer player = client.player;
+            if (player == null || client.gameMode == null){
+                return;
+            }
             int nextLevelExperience = player.getXpNeededForNextLevel();
             PlayerRideableJumping mount = player.jumpableVehicle();
             int centerX = (client.getWindow().getGuiScaledWidth() - 182) / 2;
