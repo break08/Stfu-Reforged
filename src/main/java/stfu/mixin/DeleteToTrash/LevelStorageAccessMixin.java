@@ -7,7 +7,7 @@ import net.minecraft.world.level.storage.LevelStorageSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 
 import java.awt.*;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public abstract class LevelStorageAccessMixin {
 
     @WrapOperation(method = "deleteLevel", at = @At(value = "INVOKE", target = "Ljava/nio/file/Files;walkFileTree(Ljava/nio/file/Path;Ljava/nio/file/FileVisitor;)Ljava/nio/file/Path;"))
     public Path deleteToTrash(Path path, FileVisitor<? super Path> visitor, Operation<Path> original) {
-        if (Config.get().deleteToTrash) {
+        if (StfuConfig.get().deleteToTrash) {
             try {
                 close();
             } catch (IOException ignored) {}

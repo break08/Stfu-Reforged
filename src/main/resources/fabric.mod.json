@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "stfu",
+	"version": "${version}",
+	"name": "Stfu Reforged",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"break08"
+	],
+	"contact": {
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/stfu-reforged",
+		"sources": "https://github.com/break08/Stfu-Reforged"
+	},
+	"license": "MIT",
+	"icon": "assets/stfu/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"stfu.Main"
+		],
+		"preLaunch": [
+			"stfu.StfuPreLaunch"
+		],
+		"modmenu": [
+			"stfu.ModMenuCompat"
+		]
+	},
+	"mixins": [
+		"stfu.mixins.json"
+	],
+	"accessWidener" : "stfu.classtweaker",
+	"depends": {
+		"fabricloader": ">=0.19",
+		"minecraft": "~1.19.4",
+		"java": ">=17",
+		"fabric-api": "*",
+                "modmenu" : "*",
+		"cloth-config": "*"
+	}
+}

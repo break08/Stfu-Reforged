@@ -6,12 +6,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 
 @Mixin(Minecraft.class)
 public abstract class DisableTextureAnimation {
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/texture/TextureManager;tick()V"))
     private void shouldTickTextures(TextureManager instance, Operation<Void> original) {
-        if (Config.get().animateTextures) original.call(instance);
+        if (StfuConfig.get().animateTextures) original.call(instance);
     }
 }

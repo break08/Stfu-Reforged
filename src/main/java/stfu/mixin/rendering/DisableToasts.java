@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 import net.minecraft.network.protocol.game.ClientboundUpdateAdvancementsPacket;
 
 @Mixin(ClientPacketListener.class)
@@ -32,6 +32,6 @@ abstract class DisableToasts {
 
     @Inject(method = "handleUpdateAdvancementsPacket", at = @At("HEAD"), cancellable = true)
     private void disableAdvancementToasts(ClientboundUpdateAdvancementsPacket packet, CallbackInfo ci) {
-        if (!Config.get().advancementToasts) ci.cancel();
+        if (!StfuConfig.get().advancementToasts) ci.cancel();
     }
 }

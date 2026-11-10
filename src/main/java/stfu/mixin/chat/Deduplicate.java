@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public abstract class Deduplicate {
             argsOnly = true
     )
     private Component compact(Component message) {
-        if (Config.get().compactChat == Config.CompactChat.NEVER || allMessages.isEmpty()) return message;
+        if (StfuConfig.get().compactChat == StfuConfig.CompactChat.NEVER || allMessages.isEmpty()) return message;
         // Skip common separators
         boolean isSeparator = true;
         for (char c : message.getString().trim().toCharArray())
@@ -44,7 +44,7 @@ public abstract class Deduplicate {
 
         // Find matching messages
         int matches = 0;
-        for (GuiMessage other : Config.get().compactChat == Config.CompactChat.ONLY_CONSECUTIVE ? List.of(allMessages.get(0)) : allMessages) {
+        for (GuiMessage other : StfuConfig.get().compactChat == StfuConfig.CompactChat.ONLY_CONSECUTIVE ? List.of(allMessages.get(0)) : allMessages) {
             Component content = other.content();
             if (!content.getContents().equals(message.getContents()) || !content.getStyle().equals(message.getStyle())) continue;
 

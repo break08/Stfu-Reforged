@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 
 @Mixin(TextureAtlasSprite.class)
 public abstract class SpriteMixin {
@@ -17,6 +17,6 @@ public abstract class SpriteMixin {
 
     @ModifyReturnValue(method = "uvShrinkRatio", at = @At("RETURN"))
     private float uvShrinkRatio(float original) {
-        return Config.get().fixModelGaps && atlasLocation != null && atlasLocation.equals(stfuReforged$blockAtlas)? 0 : original;
+        return StfuConfig.get().fixModelGaps && atlasLocation != null && atlasLocation.equals(stfuReforged$blockAtlas)? 0 : original;
     }
 }

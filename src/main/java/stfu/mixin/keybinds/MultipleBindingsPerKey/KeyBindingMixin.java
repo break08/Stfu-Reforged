@@ -39,7 +39,7 @@ public class KeyBindingMixin {
     private static void clearMap(CallbackInfo ci) {
         KeybindHolder.KEY_TO_BINDINGS.clear();
         for (KeyMapping keyMapping : ALL.values()) {
-            KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent(keyMapping.getKey(), unused -> new HashSet<>()).add(keyMapping);
+            KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent(keyMapping.getDefaultKey(), unused -> new HashSet<>()).add(keyMapping);
         }
     }
 

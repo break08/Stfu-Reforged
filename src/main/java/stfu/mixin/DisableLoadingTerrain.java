@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 
 @Mixin(Minecraft.class)
 public abstract class DisableLoadingTerrain {
@@ -18,7 +18,7 @@ public abstract class DisableLoadingTerrain {
 
     @ModifyVariable(method = "setScreen", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     public Screen setScreen(Screen screen) {
-        if (!Config.get().disableLoadingTerrain) return screen;
+        if (!StfuConfig.get().disableLoadingTerrain) return screen;
         if (screen instanceof ReceivingLevelScreen) {
             if (level == null) return new Screen(Component.empty()) {};
             else return null;

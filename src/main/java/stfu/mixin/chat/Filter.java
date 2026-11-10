@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 
 @Mixin(ChatComponent.class)
 public abstract class Filter {
@@ -19,10 +19,10 @@ public abstract class Filter {
         if (!(message instanceof MutableComponent mutable && mutable.getContents() instanceof TranslatableContents translatable)) return;
 
         if (translatable.getKey().startsWith("chat.type.advancement")) {
-            if (!Config.get().announceAdvancements) ci.cancel();
+            if (!StfuConfig.get().announceAdvancements) ci.cancel();
         } else if (translatable.getKey().equals("chat.type.admin")) {
-            Config.AdminChat adminChat = Config.get().adminChat;
-            if (adminChat == Config.AdminChat.DISABLED || (adminChat == Config.AdminChat.ONLY_PLAYERS && (translatable.getArgs()[0].equals("@") || translatable.getArgs()[0].equals(Component.literal("@")))))
+            StfuConfig.AdminChat adminChat = StfuConfig.get().adminChat;
+            if (adminChat == StfuConfig.AdminChat.DISABLED || (adminChat == StfuConfig.AdminChat.ONLY_PLAYERS && (translatable.getArgs()[0].equals("@") || translatable.getArgs()[0].equals(Component.literal("@")))))
                 ci.cancel();
         }
     }

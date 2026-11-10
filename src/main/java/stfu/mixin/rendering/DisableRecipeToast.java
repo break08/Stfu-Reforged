@@ -7,12 +7,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 
 @Mixin(RecipeToast.class)
 public class DisableRecipeToast {
     @Inject(method = "addOrUpdate", at = @At("HEAD"), cancellable = true)
     private static void disableRecipeToasts(ToastComponent p_94818_, Recipe<?> p_94819_, CallbackInfo ci) {
-        if (!Config.get().recipeToasts) ci.cancel();
+        if (!StfuConfig.get().recipeToasts) ci.cancel();
     }
 }

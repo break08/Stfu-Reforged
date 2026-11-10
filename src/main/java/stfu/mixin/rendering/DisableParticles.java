@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 
 import java.util.Map;
 import java.util.Queue;
@@ -22,26 +22,26 @@ public class DisableParticles {
 
     @Inject(method = {"render"}, at = @At("HEAD"), cancellable = true)
     private void renderParticles(CallbackInfo ci) {
-        if (particles.isEmpty() || Config.get().disableParticles) ci.cancel();
+        if (particles.isEmpty() || StfuConfig.get().disableParticles) ci.cancel();
     }
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void tick(CallbackInfo ci) {
-        if (Config.get().disableParticles) ci.cancel();
+        if (StfuConfig.get().disableParticles) ci.cancel();
     }
 
     @Inject(method = "createTrackingEmitter*", at = @At("HEAD"), cancellable = true)
     private void addEmitter(CallbackInfo ci) {
-        if (Config.get().disableParticles) ci.cancel();
+        if (StfuConfig.get().disableParticles) ci.cancel();
     }
 
     @Inject(method = "add(Lnet/minecraft/client/particle/Particle;)V", at = @At("HEAD"), cancellable = true)
     private void addParticle(CallbackInfo ci) {
-        if (Config.get().disableParticles) ci.cancel();
+        if (StfuConfig.get().disableParticles) ci.cancel();
     }
 
     @Inject(method = "createParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)Lnet/minecraft/client/particle/Particle;", at = @At("HEAD"), cancellable = true)
     private void addParticle(ParticleOptions parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ, CallbackInfoReturnable<Particle> cir) {
-        if (Config.get().disableParticles) cir.setReturnValue(null);
+        if (StfuConfig.get().disableParticles) cir.setReturnValue(null);
     }
 }
