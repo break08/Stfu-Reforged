@@ -3,8 +3,6 @@ package stfu;
 import com.mojang.blaze3d.audio.Channel;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -16,7 +14,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
-import stfu.config.StfuConfig;
 
 import java.util.Map;
 

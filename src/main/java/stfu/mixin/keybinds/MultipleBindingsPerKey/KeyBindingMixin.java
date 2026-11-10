@@ -17,19 +17,19 @@ import java.util.Set;
 @Mixin(KeyMapping.class)
 public class KeyBindingMixin {
     @Shadow
-    private InputConstants.Key key;
+    public InputConstants.Key key;
 
     @Shadow
     @Final
     private static Map<String, KeyMapping> ALL;
 
-    @Inject(method = "click", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "click", at = @At("HEAD"), order = 1001, cancellable = true)
     private static void onKeyPressed(InputConstants.Key key, CallbackInfo ci) {
         ci.cancel();
         KeybindHolder.KEY_TO_BINDINGS.getOrDefault(key, Set.of()).forEach(keyBinding -> keyBinding.clickCount++);
     }
 
-    @Inject(method = "set", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "set", at = @At("HEAD"), order = 1001, cancellable = true)
     private static void setKeyPressed(InputConstants.Key key, boolean pressed, CallbackInfo ci) {
         ci.cancel();
         KeybindHolder.KEY_TO_BINDINGS.getOrDefault(key, Set.of()).forEach(keyBinding -> keyBinding.setDown(pressed));
@@ -39,7 +39,7 @@ public class KeyBindingMixin {
     private static void clearMap(CallbackInfo ci) {
         KeybindHolder.KEY_TO_BINDINGS.clear();
         for (KeyMapping keyMapping : ALL.values()) {
-            KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent(keyMapping.getDefaultKey(), unused -> new HashSet<>()).add(keyMapping);
+            KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent(keyMapping.key, unused -> new HashSet<>()).add(keyMapping);
         }
     }
 
