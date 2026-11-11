@@ -2,6 +2,7 @@ package stfu;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.logging.LogUtils;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,7 +20,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
-import stfu.config.Config;
+import stfu.config.StfuConfig;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(value = Main.MODID)
@@ -66,11 +67,11 @@ public class Main
         //context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            Config.HANDLER.load();
             ModLoadingContext.get().registerExtensionPoint(
                     ConfigScreenHandler.ConfigScreenFactory.class,
                     () -> new ConfigScreenHandler.ConfigScreenFactory(
-                            (minecraft, parent) -> Config.HANDLER.generateGui().generateScreen(parent)));
+                            (minecraft, parent) -> AutoConfig.getConfigScreen(StfuConfig.class, parent).get()
+                    ));
         }
     }
 

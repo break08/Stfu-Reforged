@@ -1,3 +1,4 @@
+/*
 package stfu.mixin.ThreadPriorities;
 
 import net.minecraft.server.MinecraftServer;
@@ -14,3 +15,5 @@ public class MinecraftServerMixin {
         return 0;
     }
 }
+
+ */

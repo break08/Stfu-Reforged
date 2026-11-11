@@ -6,13 +6,10 @@
   "refmap": "stfu.refmap.json",
   "mixins": [
     "DefaultLANPort",
-    "NoNarratorError",
     "UnPinResourcePacks",
-    "chat.ImprovedCommandSuggestions.SharedSuggestionProviderMixin",
-    "DeleteToTrash.LevelStorageAccessMixin",
-    "ThreadPriorities.MinecraftServerMixin",
-    "ThreadPriorities.UtilMixin"
+    "DeleteToTrash.LevelStorageAccessMixin"
   ],
+  "plugin": "stfu.StfuMixinPlugin",
   "client": [
     "AllowScreensInPortals",
     "DefaultSettings",
@@ -47,7 +44,6 @@
     "rendering.ParticleCulling",
     "rendering.ModelGaps.ItemModelGeneratorMixin",
     "rendering.ModelGaps.SpriteMixin",
-    "ThreadPriorities.MainMixin",
     "UnfocusedVolumeReducer.SoundEngineMixin",
     "UnfocusedVolumeReducer.WindowActiveListenerMixin"
   ],

@@ -1,3 +1,4 @@
+/*
 package stfu.mixin.ThreadPriorities;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -29,3 +30,5 @@ public abstract class UtilMixin {
         return original.call(customFactory);
     }
 }
+
+ */

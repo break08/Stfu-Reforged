@@ -86,7 +86,7 @@ public class StfuConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     public float unfocusedVolume = 1F;
 
-
+    /*
     @ConfigEntry.Category("advanced")
     @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
     @ConfigEntry.Gui.Tooltip
@@ -101,6 +101,8 @@ public class StfuConfig implements ConfigData {
     @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
     @ConfigEntry.Gui.Tooltip
     public int ioThreadPriority = 1;
+
+     */
 
     public enum AdminChat implements SelectionListEntry.Translatable {
         ENABLED,
