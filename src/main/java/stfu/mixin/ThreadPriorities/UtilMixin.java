@@ -11,7 +11,7 @@ import net.minecraft.util.Util;
 public abstract class UtilMixin {
     @WrapOperation(
             method = {"/lambda\\$makeExecutor\\$\\d+/", "/lambda\\$makeIoExecutor\\$\\d+/"},
-            at = @At(value = "INVOKE", target = "Ljava/lang/Thread;setName(Ljava/lang/String;)V")
+            at = @At(value = "NEW", target = "(Ljava/lang/Runnable;Ljava/lang/String;)Ljava/lang/Thread;")
     )
     private static void setName(Thread instance, String name, Operation<Void> original) {
         original.call(instance, name);

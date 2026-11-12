@@ -2,12 +2,7 @@ package stfu.mixin.RemoveOverlay;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-//? >1.21.1 {
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-//?} else
-//import net.minecraft.client.renderer.RenderType;
-//? <26.1
-//import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.resources.Identifier;
@@ -27,10 +22,13 @@ public abstract class LoadingOverlayMixin {
         return Config.get().disableFade? 1F : progress;
     }
 
+    /*
     @Inject(method = "isPauseScreen", at = @At("HEAD"), cancellable = true)
     private void pausesGame(CallbackInfoReturnable<Boolean> cir) {
         if (Config.get().disableSplash && fadeIn) cir.setReturnValue(false);
     }
+
+     */
 
     @Inject(method = "isReadyToFadeOut", at = @At("HEAD"), cancellable = true)
     private void isInGracePeriod(CallbackInfoReturnable<Boolean> cir) {

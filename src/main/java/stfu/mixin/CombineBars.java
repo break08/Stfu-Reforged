@@ -2,14 +2,14 @@ package stfu.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.client.DeltaTracker;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.contextualbar.ContextualBarRenderer;
-import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.gui.Hud;
+import net.minecraft.client.gui.contextualbar.ContextualBar;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.resources.Identifier;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.world.entity.PlayerRideableJumping;
+import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,21 +19,18 @@ import stfu.config.Config;
 
 import static stfu.Main.client;
 
-@Mixin(Gui.class)
+@Mixin(Hud.class)
 public abstract class CombineBars {
     @Shadow
     protected abstract boolean willPrioritizeJumpInfo();
 
     @Inject(method = "nextContextualInfoState", at = @At("HEAD"), cancellable = true)
-    private void getCurrentBarType(CallbackInfoReturnable<Gui.ContextualInfo> cir) {
-        if (Config.get().combineBars) cir.setReturnValue(Gui.ContextualInfo.LOCATOR);
+    private void getCurrentBarType(CallbackInfoReturnable<Hud.ContextualInfo> cir) {
+        if (Config.get().combineBars) cir.setReturnValue(Hud.ContextualInfo.LOCATOR);
     }
 
-    @WrapOperation(
-            method = "extractContextualInfoBarBackground",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/contextualbar/ContextualBarRenderer;extractBackground(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"))
-    private void renderBar(ContextualBarRenderer instance, GuiGraphicsExtractor context, DeltaTracker tickCounter, Operation<Void> original) {
+    @WrapOperation(method = "extractContextualInfoBarBackground", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/contextualbar/ContextualBar;extractBackground(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"))
+    private void renderBar(ContextualBar instance, GuiGraphicsExtractor context, DeltaTracker tickCounter, Operation<Void> original) {
         if (!Config.get().combineBars) original.call(instance, context, tickCounter);
         else {
             LocalPlayer player = client.player;
@@ -63,3 +60,4 @@ public abstract class CombineBars {
         }
     }
 }
+//?}

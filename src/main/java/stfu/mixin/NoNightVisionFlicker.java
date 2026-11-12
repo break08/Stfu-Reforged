@@ -11,7 +11,7 @@ import stfu.config.Config;
 
 @Mixin(GameRenderer.class)
 public class NoNightVisionFlicker {
-    @Inject(method = "getNightVisionScale", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "nightVisionScale", at = @At("HEAD"), cancellable = true)
     private static void getNightVisionScale(LivingEntity entity, float tickProgress, CallbackInfoReturnable<Float> cir) {
         if (Config.get().nightVisionFlicker) return;
         float statusEffectDuration = entity.getEffect(MobEffects.NIGHT_VISION).getDuration();

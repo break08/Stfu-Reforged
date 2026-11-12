@@ -13,7 +13,7 @@ import org.objectweb.asm.Opcodes;
 
 
 @Mixin(ClientPacketListener.class)
-abstract class DisableToasts {
+public abstract class DisableToasts {
     @Redirect(method = "handleLogin", at = @At(value = "FIELD", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;seenInsecureChatWarning:Z", opcode = Opcodes.GETFIELD))
     private boolean onGameJoin(ClientPacketListener instance) {
         return true;

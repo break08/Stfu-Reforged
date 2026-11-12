@@ -85,7 +85,7 @@ configurations {
 }
 
 dependencies {
-    implementation "maven.modrinth:1eAoo2KR:B1mfgQmD"
+    implementation "maven.modrinth:1eAoo2KR:FfvwIZmI"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
