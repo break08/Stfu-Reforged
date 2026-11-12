@@ -5,21 +5,16 @@ loaderVersion = "${loader_version_range}" #mandatory
 license = "${mod_license}"
 
 [[mods]] #mandatory
-# The modid of the mod
 modId = "${mod_id}" #mandatory
-# The version number of the mod
 version = "${mod_version}" #mandatory
-# A display name for the mod
 displayName = "${mod_name}" #mandatory
 displayURL="https://www.curseforge.com/minecraft/mc-mods/stfu-reforged/"
 authors = "${mod_authors}" #optional
-logoFile="icon.png"
+logoFile="assets/stfu/icon.png"
 credits="Credit to ItsFelix5"
 issueTrackerURL="https://github.com/break08/Stfu-Reforged/issues/"
-# The description text for the mod (multi line!) (#mandatory)
 description = '''${mod_description}'''
 
-# The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 [[mixins]]
 config = "${mod_id}.mixins.json"
 

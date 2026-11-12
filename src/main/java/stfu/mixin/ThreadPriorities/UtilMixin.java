@@ -13,8 +13,9 @@ public abstract class UtilMixin {
             method = {"/lambda\\$makeExecutor\\$\\d+/", "/lambda\\$makeIoExecutor\\$\\d+/"},
             at = @At(value = "NEW", target = "(Ljava/lang/Runnable;Ljava/lang/String;)Ljava/lang/Thread;")
     )
-    private static void setName(Thread instance, String name, Operation<Void> original) {
-        original.call(instance, name);
+    private static Thread setName(Runnable run, String name, Operation<Thread> original) {
+        Thread instance = original.call(run, name);
         instance.setPriority(Config.get().ioThreadPriority);
+        return instance;
     }
 }

@@ -15,7 +15,8 @@ import stfu.config.Config;
 
 @Mixin(LoadingOverlay.class)
 public abstract class LoadingOverlayMixin {
-    @Shadow @Final private boolean fadeIn;
+    @Shadow @Final
+    public boolean fadeIn;
 
     @ModifyConstant(method = {"extractRenderState"}, constant = @Constant(floatValue = 2.0F))
     private float disableFade(float progress) {

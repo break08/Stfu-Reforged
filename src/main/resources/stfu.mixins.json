@@ -27,6 +27,7 @@
     "PauseMusic",
     "RemoveWidgetFade",
     "Tooltips",
+    "accessor.LoadingOverlayAccessor",
     "chat.CommandLengthLimit",
     "chat.Deduplicate",
     "chat.Filter",
