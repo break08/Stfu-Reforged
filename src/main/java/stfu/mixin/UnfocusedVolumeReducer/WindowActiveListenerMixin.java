@@ -14,7 +14,7 @@ import static stfu.Main.client;
 @Mixin(Window.class)
 public class WindowActiveListenerMixin {
     @Inject(method = "onFocus", at = @At("TAIL"))
-    private void onFocus(long handle, boolean focused, CallbackInfo ci) {
+    private void onFocus(boolean focused, CallbackInfo ci) {
         client.getSoundManager().refreshCategoryVolume(SoundSource.MASTER);
     }
 }

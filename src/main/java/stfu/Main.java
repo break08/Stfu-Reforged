@@ -16,31 +16,30 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
-import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Main.MODID)
 public class Main {
     public static final String MODID = "stfu";
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    // Mojang changed keyboard system so hard =)
     public static final KeyMapping NARRATOR_KEY = new KeyMapping(
             "key.stfu.narrator_hotkey",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_UNKNOWN,
+            InputConstants.Type.KEYBOARD,
+            InputConstants.UNKNOWN.getValue(),
             KeyMapping.Category.MISC);
 
     public static final KeyMapping TOGGLE_MUSIC_KEY = new KeyMapping(
             "key.stfu.toggle_music",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_UNKNOWN,
+            InputConstants.Type.KEYBOARD,
+            InputConstants.UNKNOWN.getValue(),
             KeyMapping.Category.MISC);
 
     public static final KeyMapping SKIP_MUSIC_KEY = new KeyMapping(
             "key.stfu.skip_music",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_UNKNOWN,
+            InputConstants.Type.KEYBOARD,
+            InputConstants.UNKNOWN.getValue(),
             KeyMapping.Category.MISC);
 
     public static Minecraft client;
