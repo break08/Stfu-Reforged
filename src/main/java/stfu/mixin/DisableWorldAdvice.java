@@ -14,10 +14,10 @@ import stfu.config.StfuConfig;
 
 @Mixin(WorldOpenFlows.class)
 public abstract class DisableWorldAdvice {
-    @Inject(method = "confirmWorldCreation(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/screens/worldselection/CreateWorldScreen;Lcom/mojang/serialization/Lifecycle;Ljava/lang/Runnable;Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;setScreen(Lnet/minecraft/client/gui/screens/Screen;)V", ordinal = 0), cancellable = true)
-    private static void confirmWorldCreation(Minecraft client, CreateWorldScreen parent, Lifecycle lifecycle, Runnable loader, boolean bypassWarnings, CallbackInfo ci) {
+    @Inject(method = "confirmWorldCreation", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;setScreen(Lnet/minecraft/client/gui/screens/Screen;)V", ordinal = 0), cancellable = true)
+    private static void confirmWorldCreation(Minecraft p_233127_, CreateWorldScreen p_233128_, Lifecycle p_233129_, Runnable p_233130_, CallbackInfo ci) {
         if (StfuConfig.get().disableWorldAdvice) {
-            loader.run();
+            p_233130_.run();
             ci.cancel();
         }
     }

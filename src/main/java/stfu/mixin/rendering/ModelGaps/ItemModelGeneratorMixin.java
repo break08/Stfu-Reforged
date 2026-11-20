@@ -7,7 +7,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.renderer.block.model.ItemModelGenerator;
 import net.minecraft.client.renderer.block.model.BlockElement;
 import net.minecraft.core.Direction;
-import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import stfu.config.StfuConfig;
@@ -35,8 +34,8 @@ public class ItemModelGeneratorMixin {
                     fromX += recess;
                     toX += recess;
                 }
-                ((Vector3f) e.from).set(fromX, fromY, e.from.z() - 0.002F);
-                ((Vector3f) e.to).set(toX, toY, e.to.z() + 0.002F);
+                e.from.set(fromX, fromY, e.from.z() - 0.002F);
+                e.to.set(toX, toY, e.to.z() + 0.002F);
             }
         }
         return original;

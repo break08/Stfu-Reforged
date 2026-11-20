@@ -1,7 +1,7 @@
 {
   "text.autoconfig.stfu.title": "STFU",
   "text.autoconfig.stfu.category.basic": "Basic",
-  "text.autoconfig.stfu.category.advanced": "Advanced",
+  "text.autoconfig.stfu.category.experimental": "Experimental",
 
   "text.autoconfig.stfu.option.maxChatHistory": "Max Chat History",
   "text.autoconfig.stfu.option.maxChatHistory.@Tooltip": "The maximum number of messages to keep in chat history.",
@@ -36,6 +36,8 @@
   "text.autoconfig.stfu.option.fixModelGaps.@Tooltip[0]": "Changes the item model generation code to prevent gaps.",
   "text.autoconfig.stfu.option.fixModelGaps.@Tooltip[1]": "Can cause issues on some devices.",
   "text.autoconfig.stfu.option.fixModelGaps.@Tooltip[2]": "Requires a reload to take effect.",
+  "text.autoconfig.stfu.option.fixModelGaps.@Tooltip[3]": "We can just reduce the impact of the model gaps a bit, you may see that gaps but it'll be smaller",
+  "text.autoconfig.stfu.option.fixModelGaps.@Tooltip[4]": "If you want to fix that all, disable this and use Model Gap Fix",
   "text.autoconfig.stfu.option.nightVisionFlicker": "Night Vision Flicker",
   "text.autoconfig.stfu.option.nightVisionFlicker.@Tooltip": "When night vision runs out the entire world flickers for a few seconds, this allows you to disable this.",
   "text.autoconfig.stfu.option.disableParticles": "Disable Particles",
@@ -57,6 +59,8 @@
   "text.autoconfig.stfu.option.ioThreadPriority.@Tooltip": "Thread priority for IO and miscellaneous async operations. Warning: Bigger is not necessarily better!",
   "text.autoconfig.stfu.option.unfocusedVolume": "Unfocused Volume",
   "text.autoconfig.stfu.option.unfocusedVolume.@Tooltip": "What to multiply the volume by when the window is not focused.",
+  "text.autoconfig.stfu.option.tooltip_fix": "Fix tooltip running out of screen.",
+  "text.autoconfig.stfu.option.tooltip_fix.@Tooltip": "Let's try, long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip long tooltip.",
 
   "key.stfu.narrator_hotkey": "Toggle Narrator (+Ctrl)",
   "key.stfu.skip_music": "Next Background Music Track",

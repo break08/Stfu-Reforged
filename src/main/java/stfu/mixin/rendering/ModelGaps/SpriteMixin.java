@@ -1,6 +1,7 @@
 package stfu.mixin.rendering.ModelGaps;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Final;
@@ -12,11 +13,11 @@ import stfu.config.StfuConfig;
 
 @Mixin(TextureAtlasSprite.class)
 public abstract class SpriteMixin {
-    @Shadow @Final private ResourceLocation atlasLocation;
+    @Shadow @Final private TextureAtlas atlas;
     @Unique private static final ResourceLocation stfuReforged$blockAtlas = new ResourceLocation("minecraft", "textures/atlas/blocks.png");
 
     @ModifyReturnValue(method = "uvShrinkRatio", at = @At("RETURN"))
     private float uvShrinkRatio(float original) {
-        return StfuConfig.get().fixModelGaps && atlasLocation != null && atlasLocation.equals(stfuReforged$blockAtlas)? 0 : original;
+        return StfuConfig.get().fixModelGaps && atlas.location().equals(stfuReforged$blockAtlas) ? 0 : original;
     }
 }

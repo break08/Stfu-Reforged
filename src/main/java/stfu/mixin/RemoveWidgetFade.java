@@ -8,7 +8,7 @@ import stfu.config.StfuConfig;
 
 @Mixin(TitleScreen.class)
 public class RemoveWidgetFade {
-    @ModifyVariable(method = "<init>(ZLnet/minecraft/client/gui/components/LogoRenderer;)V", argsOnly = true, ordinal = 0, at = @At("HEAD"))
+    @ModifyVariable(method = "<init>(Z)V", argsOnly = true, ordinal = 0, at = @At("HEAD"))
     private static boolean shutLoadFade(boolean bl) {
         return !StfuConfig.get().disableWidgetFade && bl;
     }

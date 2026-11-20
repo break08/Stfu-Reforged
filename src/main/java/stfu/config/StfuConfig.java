@@ -5,6 +5,7 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.clothconfig2.gui.entries.SelectionListEntry;
+import org.jetbrains.annotations.NotNull;
 
 @Config(name = "stfu")
 public class StfuConfig implements ConfigData {
@@ -56,9 +57,8 @@ public class StfuConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     public boolean disableWorldAdvice = true;
 
-
-    @ConfigEntry.Category("basic")
-    @ConfigEntry.Gui.Tooltip
+    @ConfigEntry.Category("experimental")
+    @ConfigEntry.Gui.Tooltip(count = 5)
     public boolean fixModelGaps = true;
 
     @ConfigEntry.Category("basic")
@@ -86,6 +86,10 @@ public class StfuConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     public float unfocusedVolume = 1F;
 
+    @ConfigEntry.Category("experimental")
+    @ConfigEntry.Gui.Tooltip
+    public boolean tooltip_fix = false;
+
     /*
     @ConfigEntry.Category("advanced")
     @ConfigEntry.BoundedDiscrete(min = 1, max = 10)
@@ -110,7 +114,7 @@ public class StfuConfig implements ConfigData {
         DISABLED;
 
         @Override
-        public String getKey() {
+        public @NotNull String getKey() {
             return "text.autoconfig.stfu.option.adminChat." + name().toLowerCase();
         }
     }
@@ -121,7 +125,7 @@ public class StfuConfig implements ConfigData {
         NEVER;
 
         @Override
-        public String getKey() {
+        public @NotNull String getKey() {
             return "text.autoconfig.stfu.option.compactChat." + name().toLowerCase();
         }
     }

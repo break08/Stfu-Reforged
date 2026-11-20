@@ -17,7 +17,7 @@ import java.util.Set;
 @Mixin(KeyMapping.class)
 public class KeyBindingMixin {
     @Shadow
-    public InputConstants.Key key;
+    private InputConstants.Key key;
 
     @Shadow
     @Final

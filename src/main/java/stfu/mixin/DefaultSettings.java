@@ -12,9 +12,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Options.class)
 public abstract class DefaultSettings {
+    /*
     @Shadow
     @Final
     private OptionInstance<Boolean> operatorItemsTab;
+
+     */
     @Shadow
     @Final
     private OptionInstance<Boolean> realmsNotifications;
@@ -22,11 +25,11 @@ public abstract class DefaultSettings {
     @Inject(method = "load*", at = @At("HEAD"))
     private void changeOptions(CallbackInfo ci) {
         Options t = (Options) (Object) this;
-        t.onboardAccessibility = false;
+        //t.onboardAccessibility = false;
         t.skipMultiplayerWarning = true;
         t.tutorialStep = TutorialSteps.NONE;
         t.joinedFirstServer = true;
-        operatorItemsTab.set(true);
+        //operatorItemsTab.set(true);
         realmsNotifications.set(false);
     }
 }
