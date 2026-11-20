@@ -12,7 +12,7 @@ public class StfuConfig implements ConfigData {
     public static StfuConfig get(){
         return AutoConfig.getConfigHolder(StfuConfig.class).getConfig();
     }
-
+    // Basic
     @ConfigEntry.Category("basic")
     @ConfigEntry.Gui.Tooltip
     public int maxChatHistory = 100;
@@ -57,10 +57,6 @@ public class StfuConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     public boolean disableWorldAdvice = true;
 
-    @ConfigEntry.Category("experimental")
-    @ConfigEntry.Gui.Tooltip(count = 5)
-    public boolean fixModelGaps = true;
-
     @ConfigEntry.Category("basic")
     @ConfigEntry.Gui.Tooltip
     public boolean nightVisionFlicker = false;
@@ -86,9 +82,16 @@ public class StfuConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip
     public float unfocusedVolume = 1F;
 
+    // Experimental
+    @ConfigEntry.Category("experimental")
+    @ConfigEntry.Gui.Tooltip(count = 5)
+    public boolean fixModelGaps = true;
+
     @ConfigEntry.Category("experimental")
     @ConfigEntry.Gui.Tooltip
     public boolean tooltip_fix = false;
+
+    // Advanced
 
     /*
     @ConfigEntry.Category("advanced")
