@@ -6,8 +6,12 @@
   "refmap": "stfu.refmap.json",
   "mixins": [
     "DefaultLANPort",
+    "NoNarratorError",
     "UnPinResourcePacks",
-    "DeleteToTrash.LevelStorageAccessMixin"
+    "chat.ImprovedCommandSuggestions.SharedSuggestionProviderMixin",
+    "DeleteToTrash.LevelStorageAccessMixin",
+    "ThreadPriorities.MinecraftServerMixin",
+    "ThreadPriorities.UtilMixin"
   ],
   "client": [
     "AllowScreensInPortals",
@@ -43,6 +47,7 @@
     "rendering.ParticleCulling",
     "rendering.ModelGaps.ItemModelGeneratorMixin",
     "rendering.ModelGaps.SpriteMixin",
+    "ThreadPriorities.MainMixin",
     "UnfocusedVolumeReducer.SoundEngineMixin",
     "UnfocusedVolumeReducer.WindowActiveListenerMixin"
   ],

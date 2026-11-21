@@ -84,11 +84,15 @@ public class Config {
     @SerialEntry
     public boolean disableWorldAdvice = true;
 
-
     @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean fixModelGaps = true;
+
+    @AutoGen(category = basic)
+    @Boolean
+    @SerialEntry
+    public boolean tooltip_fix = true;
 
     @AutoGen(category = basic)
     @Boolean
@@ -120,9 +124,6 @@ public class Config {
     @SerialEntry
     public float unfocusedVolume = 1F;
 
-
-    /*
-
     @AutoGen(category = advanced)
     @IntSlider(min = 1, max = 10, step = 1)
     @SerialEntry
@@ -137,8 +138,6 @@ public class Config {
     @IntSlider(min = 1, max = 10, step = 1)
     @SerialEntry
     public int ioThreadPriority = 1;
-
-     */
 
     public enum AdminChat implements NameableEnum {
         ENABLED,
