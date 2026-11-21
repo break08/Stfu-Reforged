@@ -79,7 +79,11 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 
+    // YACL
     implementation fg.deobf("maven.modrinth:yacl:3.6.6+1.20.1-forge")
+
+    // Mixin Booster
+    implementation fg.deobf("maven.modrinth:bxn6Iwdo:rOaAYvPZ")
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0")) {
